@@ -6,9 +6,11 @@ import com.FoodDash.FoodDash.entities.Restaurant;
 import com.FoodDash.FoodDash.repository.MenuItemRepo;
 import com.FoodDash.FoodDash.repository.RestaurantRepo;
 import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -41,5 +43,24 @@ public class MenuItemService {
         dto.setPrice(savedMenuItem.getPrice());
         dto.setRestaurantId(savedMenuItem.getRestaurant().getId());
         return dto;
+    }
+
+    public MenuItemDto getByid(Long id) {
+        MenuItem menuItem = menuItemRepo.findById(id).orElseThrow(() ->
+                new RuntimeException("MenuItem Not Fount with given ID: "+ id));
+
+        return convertToDto(menuItem);
+    }
+
+    public void deleteById(Long id) {
+         menuItemRepo.deleteById(id);
+    }
+
+    public List<MenuItemDto> getByRestaurantId(Long id) {
+
+        return menuItemRepo.findByRestaurantId(id)
+                .stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 }
