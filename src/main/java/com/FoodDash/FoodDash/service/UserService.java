@@ -21,7 +21,6 @@ public class UserService {
     public UserResponseDto createUser(UserRequestDto dto) {
 
         User user = new User();
-        user.setId(dto.getId());
         user.setName(dto.getName());
         user.setEmail(dto.getEmail());
         user.setPhone(dto.getPhone());
@@ -58,5 +57,9 @@ public class UserService {
                 .stream()
                 .map(this::convertToResponseDto)
                 .collect(Collectors.toList());
+    }
+
+    public void deleteUser(Long id) {
+        userRepo.deleteById(id);
     }
 }

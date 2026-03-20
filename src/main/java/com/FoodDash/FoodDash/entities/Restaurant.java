@@ -15,7 +15,7 @@ public class Restaurant {
 
     @Id
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE
+            strategy = GenerationType.AUTO
     )
     private Long id;
     private String name;
