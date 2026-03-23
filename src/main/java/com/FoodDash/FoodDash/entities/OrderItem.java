@@ -7,22 +7,21 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 @Entity
-public class CartItem {
+public class OrderItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
+    private int quantity;
 
+    private double price;
 
     @ManyToOne
-    @JoinColumn(name= "cart_id")
-    private Cart cart;
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "menu_item_id")
     private MenuItem menuItem;
-
-    private int quantity;
 }

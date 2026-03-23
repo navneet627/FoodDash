@@ -15,6 +15,8 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String itemName;
+
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;

@@ -3,6 +3,8 @@ package com.FoodDash.FoodDash.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data
 @Table(name = "User")
@@ -19,4 +21,8 @@ public class User {
     private String phone;
     private String address;
     private String role;
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orders;
 }
