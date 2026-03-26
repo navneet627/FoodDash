@@ -1,5 +1,6 @@
 package com.FoodDash.FoodDash.entities;
 
+import com.FoodDash.FoodDash.enums.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,7 +21,9 @@ public class User {
     private String password;
     private String phone;
     private String address;
-    private String role;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

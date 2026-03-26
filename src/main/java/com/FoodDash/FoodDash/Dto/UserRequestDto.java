@@ -1,5 +1,6 @@
 package com.FoodDash.FoodDash.Dto;
 
+import com.FoodDash.FoodDash.enums.Role;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -13,5 +14,5 @@ public class UserRequestDto {
     private String password;
     private String phone;
     private String address;
-    private String role;
+    private Role role;
 }

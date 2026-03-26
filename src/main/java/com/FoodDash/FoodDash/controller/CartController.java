@@ -4,6 +4,7 @@ import com.FoodDash.FoodDash.Dto.CartDto;
 import com.FoodDash.FoodDash.service.CartSerivce;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,6 +14,7 @@ public class CartController {
 
     private final CartSerivce cartSerivce;
 
+    @PreAuthorize("hashRole('USER')")
     @PostMapping("/add")
     public ResponseEntity<CartDto> addToCart(@RequestParam Long userId,
                                       @RequestParam Long menuItemId,

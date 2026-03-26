@@ -10,6 +10,7 @@ import com.FoodDash.FoodDash.enums.OrderStatus;
 import com.FoodDash.FoodDash.repository.CartRepo;
 import com.FoodDash.FoodDash.repository.OrderRepo;
 import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -93,6 +94,18 @@ public class OrderService {
         }
 
         orderDto.setOrderItemList(orderItemDtoList);
+
+        return orderDto;
+    }
+
+    public  List<OrderDto>  getAllOrders() {
+
+        List<Order> orders = orderRepo.findAll();
+        List<OrderDto> orderDto = new ArrayList<>();
+
+        for(Order order : orders){
+            orderDto.add(convertToDto(order));
+        }
 
         return orderDto;
     }

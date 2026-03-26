@@ -6,6 +6,7 @@ import com.FoodDash.FoodDash.Dto.SignupRequest;
 import com.FoodDash.FoodDash.security.JwtUtil;
 import com.FoodDash.FoodDash.service.AuthService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,23 +26,12 @@ public class AuthController {
 
     @PostMapping("/signup")
     public String signup(@RequestBody SignupRequest request){
-
          authService.signup(request);
          return "User Registered Successfully";
-
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody AuthRequest authRequest){
-        authenticationManager.authenticate(
-                     new UsernamePasswordAuthenticationToken(
-                             authRequest.getEmail(),
-                             authRequest.getPassword()
-                     )
-        );
-
-        String token = jwtUtil.generateToken(authRequest.getEmail());
-
-        return new AuthResponse(token);
+    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest){
+        return ResponseEntity.ok(authService.login(authRequest));
     }
 }
